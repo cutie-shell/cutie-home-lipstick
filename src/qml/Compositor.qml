@@ -287,4 +287,32 @@ Item {
         wallpaperItem: root
         z: 8
     }
+
+    function setLockScreen(enabled) {
+        if (enabled) {
+            LipstickSettings.lockscreenVisible = true
+        } else {
+            LipstickSettings.lockscreenVisible = false
+        }
+    }
+
+    Connections {
+        target: Lipstick.compositor
+        function onDisplayOff() {
+            LipstickSettings.lockscreenVisible = true
+        }
+
+        function onDisplayOn() {
+            LipstickSettings.lockscreenVisible = true
+        }
+    }
+
+    LockScreen {
+        id: lockScreen
+        z: 10
+
+        Component.onCompleted: {
+            setLockScreen(true);
+        }
+    }
 }
