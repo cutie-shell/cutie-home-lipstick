@@ -71,8 +71,8 @@ Page {
         id: appgrid
         anchors.fill: parent
         anchors.margins: Screen.pixelDensity
-        cellWidth: switcherModel.itemCount > 1 ? width / Math.floor(Math.sqrt(switcherModel.itemCount)) : width / 2
-        cellHeight: switcherModel.itemCount > 1 ? height / Math.floor(Math.sqrt(switcherModel.itemCount)) : height / 2
+        cellWidth: switcherModel.itemCount > 4 ? width / Math.ceil(Math.sqrt(switcherModel.itemCount)) : width / 2
+        cellHeight: switcherModel.itemCount > 4 ? height / Math.ceil(Math.sqrt(switcherModel.itemCount)) : height / 2
         z: 1
         model: switcherModel
         delegate: Item {
@@ -82,6 +82,7 @@ Page {
             Rectangle {
                 id: dimItem
                 anchors.fill: parent
+                anchors.margins: Screen.pixelDensity
                 color: "black"
                 opacity: 0.6
             }
