@@ -173,6 +173,8 @@ Item {
             } else {
                 animateInById(w.window.windowId); 
             }
+
+            appLauncher.close();
         }   
 
         onWindowRemoved: {
