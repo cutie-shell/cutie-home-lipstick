@@ -165,9 +165,7 @@ Item {
                 animateInById(w.window.windowId);
             } else if (isNotificationWindow) {
             } else if (isOverlayWindow) {
-                animateInById(window.windowId);
             } else if (isDialogWindow) {
-                animateInById(window.windowId);
             } else if (isAlarmWindow) {
                 animateInById(w.window.windowId);
             } else {
@@ -189,7 +187,7 @@ Item {
         anchors.fill: parent
         z: 7
 
-        property int boundary: 5 * Screen.pixelDensity
+        property int boundary: 2 * Screen.pixelDensity
         property int threshold: 15 * Screen.pixelDensity
 
         property bool active: gesture != ""
