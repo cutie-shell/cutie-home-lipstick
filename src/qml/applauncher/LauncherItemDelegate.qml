@@ -42,7 +42,7 @@ MouseArea {
     Item {
         id: iconWrapper
         height: width
-        width: parent.width - Screen.pixelDensity * 2
+        width: parent.width - Screen.pixelDensity * 6
         anchors{
             top: parent.top
             horizontalCenter: parent.horizontalCenter
@@ -65,10 +65,10 @@ MouseArea {
     Text {
         id: iconText
         width: iconWrapper.width
-        height: Screen.pixelDensity
+        height: Screen.pixelDensity * 2
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: Screen.pixelDensity
+        font.pixelSize: Screen.pixelDensity * 2
         color: "white"
 
         wrapMode: Text.WordWrap

@@ -56,7 +56,7 @@ Drawer {
         anchors.margins: Screen.pixelDensity
         model: launcherModel
         cellWidth: 15 * Screen.pixelDensity
-        cellHeight: cellWidth
+        cellHeight: 18 * Screen.pixelDensity
         delegate: Loader {
             id:loader
             width: launcherGrid.cellWidth
