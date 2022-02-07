@@ -20,7 +20,7 @@ Item {
     Image {
         id: wallpaperImage
         anchors.fill: parent
-        source: wallpaperSource.defaultValue
+        source: wallpaperSource.value
         fillMode: Image.PreserveAspectCrop
     }
 
