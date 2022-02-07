@@ -48,7 +48,7 @@ Item {
         id: gestureArea
         anchors.fill: parent
 
-        property int threshold: 15 * Screen.pixelDensity
+        property int threshold: 25 * Screen.pixelDensity
 
         property int origX
         property int origY
@@ -69,7 +69,7 @@ Item {
             var mouseReal = mapToItem(_mapTo, mouse.x, mouse.y);
 
             if (gesture == "up") {
-                if (origY = mouseReal.y > threshold) {
+                if (origY - mouseReal.y > threshold) {
                     LipstickSettings.lockscreenVisible = false;
                 } 
             }
