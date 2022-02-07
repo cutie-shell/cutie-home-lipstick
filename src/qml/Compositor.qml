@@ -20,6 +20,7 @@ import QtQml.Models 2.15
 
 import org.nemomobile.lipstick 0.1
 import org.nemomobile.devicelock 1.0
+import org.nemomobile.configuration 1.0
 
 import "compositor"
 import "scripts/desktop.js" as Desktop
@@ -27,6 +28,16 @@ import "scripts/desktop.js" as Desktop
 Item {
     id: root
     anchors.fill: parent
+
+    ConfigurationValue {
+        id: dpi
+        key: "/home/cutie/homeScreen/dpi"
+        defaultValue: Screen.pixelDensity
+        Component.onCompleted: {
+            value = Screen.pixelDensity
+        }
+    }
+
     Wallpaper {
         id: wallpaperItem
         anchors.fill: parent
