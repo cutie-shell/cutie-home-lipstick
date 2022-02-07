@@ -38,6 +38,13 @@ Item {
         }
     }
 
+    property ConfigurationValue themeVariantConfig: themeVariant
+    ConfigurationValue {
+        id: themeVariant
+        key: "/home/cutie/theme/variant"
+        defaultValue: "dark"
+    }
+
     Wallpaper {
         id: wallpaperItem
         anchors.fill: parent

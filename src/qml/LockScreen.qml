@@ -26,17 +26,17 @@ Item {
 
     Text { 
         id: lockscreenTime
-        color: "white"
+        color: themeVariantConfig.value == "dark" ? "white" : "black"
         text: Qt.formatDateTime(new Date(), "HH:mm")
-        font.pixelSize: 10 * Screen.pixelDensity
+        font.pixelSize: 15 * Screen.pixelDensity
         font.family: "Lato"
-        font.weight: Font.Lighr
+        font.weight: Font.Light
         anchors { centerIn:parent }
     }
 
     Text { 
         id: lockscreenDate
-        color: "white"
+        color: themeVariantConfig.value == "dark" ? "white" : "black"
         text: Qt.formatDateTime(new Date(), "dddd, MMMM d")
         font.pixelSize: 3 * Screen.pixelDensity
         font.family: "Lato"

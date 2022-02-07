@@ -69,7 +69,7 @@ MouseArea {
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: Screen.pixelDensity * 2
-        color: "white"
+        color: themeVariantConfig.value == "dark" ? "white" : "black"
 
         wrapMode: Text.WordWrap
 

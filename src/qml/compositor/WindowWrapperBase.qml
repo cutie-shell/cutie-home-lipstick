@@ -32,7 +32,7 @@ Item {
             width: wrapper.width
             height: wrapper.height
             Rectangle {
-                color: "black"
+                color: themeVariantConfig.value == "dark" ? "black" : "white"
                 x: oMask.clipX
                 y: oMask.clipY
                 width: oMask.clipW

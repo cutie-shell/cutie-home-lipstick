@@ -38,7 +38,7 @@ Item {
     Rectangle {
         id: dimItem
         anchors.fill: parent
-        color: "black"
+        color: themeVariantConfig.value == "dark" ? "black" : "white"
         opacity: shade * 0.6
         Behavior on opacity {
             NumberAnimation { duration: 200 }

@@ -37,7 +37,7 @@ Drawer {
         Rectangle {
             id: dimItem
             anchors.fill: parent
-            color: "black"
+            color: themeVariantConfig.value == "dark" ? "black" : "white"
             opacity: 0.5
         }
     }

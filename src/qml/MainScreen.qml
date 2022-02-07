@@ -25,6 +25,13 @@ Page {
         id: switcherModel
     }
 
+    property ConfigurationValue themeVariantConfig: themeVariant
+    ConfigurationValue {
+        id: themeVariant
+        key: "/home/cutie/theme/variant"
+        defaultValue: "dark"
+    }
+
     states: [
         State {
             name: "switcher"
@@ -48,7 +55,7 @@ Page {
         Rectangle {
             id: backgroundShader
             anchors.fill: parent
-            color: "black"
+            color: themeVariantConfig.value == "dark" ? "black" : "white"
             opacity: 0.7
         }
 
@@ -59,7 +66,7 @@ Page {
             text: "Notifications"
             font.pixelSize: 5 * Screen.pixelDensity
             font.weight: Font.Light
-            color: "white"
+            color: themeVariantConfig.value == "dark" ? "white" : "black"
         }
 
         Behavior on opacity {
@@ -83,7 +90,7 @@ Page {
                 id: dimItem
                 anchors.fill: parent
                 anchors.margins: Screen.pixelDensity
-                color: "black"
+                color: themeVariantConfig.value == "dark" ? "black" : "white"
                 opacity: 0.6
             }
 
@@ -165,19 +172,19 @@ Page {
             
             if (gesture == "left") {
                 if (root.state == "switcher") {
-                    appgrid.opacity = 1 - (mouseReal.x - origX)/origX;
-                    feedPage.opacity = (mouseReal.x - origX)/origX;
+                    appgrid.opacity = 1 - (mouseReal.x - origX)/(_mapTo.width - origX);
+                    feedPage.opacity = (mouseReal.x - origX)/(_mapTo.width - origX);
                 } else if (root.state == "feed") {
-                    appgrid.opacity = (mouseReal.x - origX)/origX;
-                    feedPage.opacity = 1 - (mouseReal.x - origX)/origX;
+                    appgrid.opacity = (mouseReal.x - origX)/(_mapTo.width - origX);
+                    feedPage.opacity = 1 - (mouseReal.x - origX)/(_mapTo.width - origX);
                 }
             } else if (gesture == "right") {
                 if (root.state == "switcher") {
-                    appgrid.opacity = 1 - (origX - mouseReal.x)/(_mapTo.width - origX);
-                    feedPage.opacity = (origX - mouseReal.x)/(_mapTo.width - origX);
+                    appgrid.opacity = 1 - (origX - mouseReal.x)/origX;
+                    feedPage.opacity = (origX - mouseReal.x)/origX;
                 } else if (root.state == "feed") {
-                    appgrid.opacity = (origX - mouseReal.x)/(_mapTo.width - origX);
-                    feedPage.opacity = 1 - (origX - mouseReal.x)/(_mapTo.width - origX);
+                    appgrid.opacity = (origX - mouseReal.x)/origX;
+                    feedPage.opacity = 1 - (origX - mouseReal.x)/origX;
                 }
             }
         }
