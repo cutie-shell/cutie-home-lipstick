@@ -8,8 +8,28 @@ Item {
     property Item oMaskItem: oMask
     width: window !== null ? window.width : 0
     height: window !== null ? window.height : 0
-    NumberAnimation on opacity { id: fadeInAnimation; running: false; from: 0; to: 1; duration: 200 }
-    NumberAnimation on opacity { id: fadeOutAnimation; running: false; from: oMask.opacity; to: 0; duration: 200 }
+    NumberAnimation on opacity { 
+        id: fadeInAnimation
+        running: false
+        from: 0
+        to: 1
+        duration: 200 
+
+        onStarted: {
+            wrapper.visible = true;
+        }
+    }
+    NumberAnimation on opacity { 
+        id: fadeOutAnimation
+        running: false
+        from: oMask.opacity
+        to: 0
+        duration: 200 
+
+        onFinished: {
+            wrapper.visible = false;
+        }
+    }
     function animateIn() { fadeInAnimation.start(); }
     function animateOut() { fadeOutAnimation.start(); }
 
