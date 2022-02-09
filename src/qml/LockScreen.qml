@@ -15,6 +15,11 @@ Item {
     width: parent.width
     visible: LipstickSettings.lockscreenVisible === true
 
+    function timeChanged() {
+        lockscreenTime.text = Qt.formatDateTime(new Date(), "HH:mm");
+        lockscreenDate.text = Qt.formatDateTime(new Date(), "dddd, MMMM d");
+    }
+
     Behavior on opacity {
         NumberAnimation { duration: 200 }
     }
@@ -42,6 +47,11 @@ Item {
         font.family: "Lato"
         font.weight: Font.Black
         anchors { right: lockscreenTime.right; top: lockscreenTime.bottom }
+    }
+
+    Timer {
+        interval: 100; running: true; repeat: true;
+        onTriggered: timeChanged()
     }
 
     MouseArea {
