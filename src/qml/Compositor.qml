@@ -263,7 +263,7 @@ Item {
                     comp.topmostApplicationWindow.oMaskItem.opacity = 1.0;
                 }
             } else if (gesture == "right") {
-                if (mouseReal.x < _mapTo.width - threshold) {
+                if (!comp.homeActive && mouseReal.x < _mapTo.width - threshold) {
                     comp.animateInById(comp.homeWindow.window.windowId);
                 }
 
