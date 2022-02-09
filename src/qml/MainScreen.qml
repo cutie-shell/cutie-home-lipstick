@@ -47,6 +47,11 @@ Page {
 
     state: "switcher"
 
+    StatusBar {
+        id: statusBar
+        z: 2
+    }
+
     Item {
         id: feedPage
         anchors.fill: parent
@@ -63,6 +68,7 @@ Page {
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.margins: 5 * Screen.pixelDensity
+            anchors.topMargin: 3 * Screen.pixelDensity + statusBar.height
             text: "Notifications"
             font.pixelSize: 5 * Screen.pixelDensity
             font.weight: Font.Light
@@ -77,7 +83,8 @@ Page {
     GridView {
         id: appgrid
         anchors.fill: parent
-        anchors.margins: Screen.pixelDensity
+        anchors.margins: 3 * Screen.pixelDensity
+        anchors.topMargin: 2 * Screen.pixelDensity + statusBar.height
         cellWidth: switcherModel.itemCount > 4 ? width / Math.ceil(Math.sqrt(switcherModel.itemCount)) : width / 2
         cellHeight: switcherModel.itemCount > 4 ? height / Math.ceil(Math.sqrt(switcherModel.itemCount)) : height / 2
         z: 1
