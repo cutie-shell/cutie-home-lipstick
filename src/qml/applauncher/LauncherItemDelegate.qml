@@ -64,7 +64,7 @@ MouseArea {
 
     Text {
         id: iconText
-        width: iconWrapper.width
+        width: root.width
         height: Screen.pixelDensity * 2
         elide: Text.ElideRight
         horizontalAlignment: Text.AlignHCenter
