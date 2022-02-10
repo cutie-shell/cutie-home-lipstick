@@ -9,7 +9,6 @@ import org.nemomobile.configuration 1.0
 import org.cutieshell 1.0
 
 import "scripts/desktop.js" as Desktop
-import "mainscreen"
 
 Page {
     id: root
