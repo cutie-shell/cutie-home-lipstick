@@ -17,6 +17,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQml.Models 2.15
+import QtFeedback 5.0
 
 import org.nemomobile.lipstick 0.1
 import org.nemomobile.devicelock 1.0
@@ -43,6 +44,16 @@ Item {
         id: themeVariant
         key: "/home/cutie/theme/variant"
         defaultValue: "dark"
+    }
+
+    HapticsEffect {
+        id: rumbleEffect
+        attackIntensity: 0.0
+        attackTime: 250
+        intensity: 1.0
+        duration: 100
+        fadeTime: 250
+        fadeIntensity: 0.0
     }
 
     Wallpaper {
@@ -244,6 +255,7 @@ Item {
 
             if (gesture == "close") {
                 if (!comp.homeActive && mouseReal.y > threshold) {
+                    rumbleEffect.start();
                     Lipstick.compositor.closeClientForWindowId(comp.topmostApplicationWindow.window.windowId);
                 }
 
@@ -254,6 +266,7 @@ Item {
                 }
             } else if (gesture == "left") {
                 if (!comp.homeActive && mouseReal.x > threshold) {
+                    rumbleEffect.start();
                     comp.animateInById(comp.homeWindow.window.windowId);
                 }
 
@@ -264,6 +277,7 @@ Item {
                 }
             } else if (gesture == "right") {
                 if (!comp.homeActive && mouseReal.x < _mapTo.width - threshold) {
+                    rumbleEffect.start();
                     comp.animateInById(comp.homeWindow.window.windowId);
                 }
 

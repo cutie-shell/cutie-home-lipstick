@@ -25,6 +25,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import org.nemomobile.lipstick 0.1
+import QtFeedback 5.0
 
 MouseArea {
     id: root
@@ -34,9 +35,20 @@ MouseArea {
 
     onClicked: {
         if (modelData.object.type !== LauncherModel.Folder) {
+            rumbleEffect.start();
             modelData.object.launchApplication();
             appLauncher.close();
         }
+    }
+
+    HapticsEffect {
+        id: rumbleEffect
+        attackIntensity: 0.0
+        attackTime: 250
+        intensity: 1.0
+        duration: 100
+        fadeTime: 250
+        fadeIntensity: 0.0
     }
 
     Item {

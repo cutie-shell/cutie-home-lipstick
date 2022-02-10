@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import QtGraphicalEffects 1.15
+import QtFeedback 5.0
 
 import org.nemomobile.lipstick 0.1
 import org.nemomobile.configuration 1.0
@@ -45,6 +46,16 @@ Page {
     ]
 
     state: "switcher"
+
+    HapticsEffect {
+        id: rumbleEffect
+        attackIntensity: 0.0
+        attackTime: 250
+        intensity: 1.0
+        duration: 100
+        fadeTime: 250
+        fadeIntensity: 0.0
+    }
 
     StatusBar {
         id: statusBar
@@ -116,6 +127,7 @@ Page {
                 onClicked: {
                     var mouseReal = mapToItem(_mapTo, mouse.x, mouse.y);
                     if (Math.abs(gestureArea.origX - mouseReal.x) < threshold && Math.abs(gestureArea.origY - mouseReal.y) < threshold) {
+                        rumbleEffect.start();
                         Lipstick.compositor.animateInById(model.window);
                     }
                 }
@@ -156,6 +168,7 @@ Page {
 
             if (gesture == "left" || gesture == "right") {
                 if ((gesture == "left" && mouseReal.x - origX > threshold) || (gesture == "right" && origX - mouseReal.x > threshold)) {
+                    rumbleEffect.start();
                     root.state = (root.state == "switcher") ? "feed" : "switcher";
                 } else {
                     appgrid.opacity = (root.state == "switcher") ? 1 : 0;
