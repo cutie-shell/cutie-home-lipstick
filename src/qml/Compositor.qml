@@ -39,6 +39,12 @@ Item {
         }
     }
 
+    ConfigurationValue {
+        id: orientationConfig
+        key: "/home/cutie/homeScreen/orientation"
+        defaultValue: Qt.PortraitOrientation
+    }
+
     property ConfigurationValue themeVariantConfig: themeVariant
     ConfigurationValue {
         id: themeVariant
@@ -58,7 +64,15 @@ Item {
 
     Wallpaper {
         id: wallpaperItem
-        anchors.fill: parent
+        rotation: Screen.angleBetween(comp.screenOrientation, Screen.primaryOrientation)
+        width: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.width : parent.height)
+        height: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.height : parent.width)
+        transformOrigin: Item.Center
+	    anchors.centerIn: parent
     }
 
     Component.onCompleted: {
@@ -108,7 +122,13 @@ Item {
         property Item topmostWindow
         property Item topmostApplicationWindow
 
-        homeActive: topmostWindow == homeWindow
+        homeActive: topmostWindow == homeWindow 
+        screenOrientation: sensorOrientation
+	    topmostWindowOrientation: screenOrientation
+
+        onScreenOrientationChanged: {
+            orientationConfig.value = screenOrientation;
+        }
 
         function openWindowTransparent(winId) {
             var o = comp.windowForId(winId);
@@ -213,7 +233,15 @@ Item {
 
     MouseArea {
         id: gestureArea
-        anchors.fill: parent
+        rotation: Screen.angleBetween(comp.screenOrientation, Screen.primaryOrientation)
+        width: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.width : parent.height)
+        height: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.height : parent.width)
+        transformOrigin: Item.Center
+	    anchors.centerIn: parent
         z: 7
 
         property int boundary: 2 * Screen.pixelDensity
@@ -222,8 +250,8 @@ Item {
         property bool active: gesture != ""
         property string gesture
 
-        property Item _mapTo: root
-
+        property Item _mapTo: gestureArea
+        
         onPressed: {
             var mouseReal = mapToItem(_mapTo, mouse.x, mouse.y);
             
@@ -342,6 +370,15 @@ Item {
     LockScreen {
         id: lockScreen
         z: 10
+        rotation: Screen.angleBetween(comp.screenOrientation, Screen.primaryOrientation)
+        width: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.width : parent.height)
+        height: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.height : parent.width)
+        transformOrigin: Item.Center
+	    anchors.centerIn: parent
 
         Component.onCompleted: {
             setLockScreen(true);

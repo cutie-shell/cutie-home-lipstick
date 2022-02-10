@@ -9,11 +9,14 @@ import "applauncher"
 
 Drawer {
     id: root
-    height: parent.height
-    width: parent.width
-    edge: Qt.BottomEdge
+    edge: (comp.screenOrientation == Qt.PortraitOrientation ? Qt.BottomEdge  : 
+        (comp.screenOrientation == Qt.InvertedLandscapeOrientation ? Qt.LeftEdge : 
+        (comp.screenOrientation == Qt.InvertedPortraitOrientation ? Qt.TopEdge : Qt.RightEdge)))
     interactive: !LipstickSettings.lockscreenVisible
-    dragMargin: 5 * Screen.pixelDensity
+    dragMargin: 2 * Screen.pixelDensity
+    width: parent.width
+    height: parent.height
+
     property Item wallpaperItem
 
     function close() {
@@ -27,8 +30,12 @@ Drawer {
         FastBlur {
             id: blurItem
             source: wallpaperItem
-            x: 0
-            y: (root.position - 1.0) * Screen.height
+            x: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? 0 : (comp.screenOrientation == Qt.LandscapeOrientation ? root.position - 1.0: 1.0 - root.position) * Screen.width)
+            y: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? (comp.screenOrientation == Qt.PortraitOrientation ? root.position - 1.0: 1.0 - root.position) * Screen.height : 0)
             width: parent.width
             height: parent.height
             radius: 64
@@ -52,8 +59,15 @@ Drawer {
 
     GridView {
         id: launcherGrid
-        anchors.fill: parent
-        anchors.margins: Screen.pixelDensity
+        rotation: Screen.angleBetween(comp.screenOrientation, Screen.primaryOrientation)
+        width: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.width : parent.height) - 2 * Screen.pixelDensity
+        height: ((comp.screenOrientation == Qt.PortraitOrientation || 
+            comp.screenOrientation == Qt.InvertedPortraitOrientation) 
+            ? parent.height : parent.width)
+        transformOrigin: Item.Center
+        anchors.centerIn: parent
         model: launcherModel
         cellWidth: 15 * Screen.pixelDensity
         cellHeight: 18 * Screen.pixelDensity
@@ -64,6 +78,21 @@ Drawer {
             property QtObject modelData : model
             property int cellIndex: index
             sourceComponent: app
+        }
+
+        Behavior on rotation {
+            RotationAnimator { 
+                duration: 200
+                direction: RotationAnimator.Shortest
+            }
+        }
+
+        Behavior on height {
+            NumberAnimation { duration: 200 }
+        }
+
+        Behavior on width {
+            NumberAnimation { duration: 200 }
         }
 
         Component {

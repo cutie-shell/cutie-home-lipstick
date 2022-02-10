@@ -17,6 +17,21 @@ Item {
         defaultValue: "/usr/share/lipstick-cutie-home-qt5/qml/images/wallpaper.jpg"
     }
 
+    Behavior on rotation {
+        RotationAnimator { 
+            duration: 200
+            direction: RotationAnimator.Shortest
+        }
+    }
+
+    Behavior on height {
+        NumberAnimation { duration: 200 }
+    }
+
+    Behavior on width {
+        NumberAnimation { duration: 200 }
+    }
+
     Image {
         id: wallpaperImage
         anchors.fill: parent

@@ -11,8 +11,6 @@ Item {
     id: root
     x: 0
     y: 0
-    height: parent.height
-    width: parent.width
     visible: LipstickSettings.lockscreenVisible === true
 
     function timeChanged() {
@@ -21,6 +19,21 @@ Item {
     }
 
     Behavior on opacity {
+        NumberAnimation { duration: 200 }
+    }
+
+    Behavior on rotation {
+        RotationAnimator { 
+            duration: 200
+            direction: RotationAnimator.Shortest
+        }
+    }
+
+    Behavior on height {
+        NumberAnimation { duration: 200 }
+    }
+
+    Behavior on width {
         NumberAnimation { duration: 200 }
     }
 
