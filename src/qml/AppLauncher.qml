@@ -101,8 +101,9 @@ Drawer {
                 id: launcherItem
                 Component.onCompleted: {
                     if(modelData) {
-                        launcherItem.iconText.text = modelData.object.title
-                        launcherItem.iconImage.source = modelData.object.iconId == "" ? "" : (modelData.object.iconId.indexOf("/") == 0 ? "file://" : "file:///usr/share/icons/hicolor/scalable/apps/") + modelData.object.iconId + (modelData.object.iconId.indexOf("/") == 0 ? "" : ".svg")
+                        launcherItem.iconText.text = modelData.object.title;
+                        if (!modelData.object.iconId.includes('/')) launcherItem.iconImage.icon.name = modelData.object.iconId;
+                        if (modelData.object.iconId.includes('/')) launcherItem.iconImage.icon.source = "file://" + modelData.object.iconId;
                     }
                 }
             }

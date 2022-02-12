@@ -60,17 +60,15 @@ MouseArea {
             horizontalCenter: parent.horizontalCenter
         }
 
-        Image {
+        Button {
             id: iconImage
             anchors.centerIn: parent
             height: parent.height
             width: parent.width
-            asynchronous: true
-            onStatusChanged: {
-                if (iconImage.status == Image.Error) {
-                    iconImage.source = "/usr/share/lipstick-glacier-home-qt5/qml/theme/default-icon.png"
-                }
-            }
+            background: Item {}
+            icon.width: width
+            icon.height: height
+            icon.color: "transparent"
         }
     }
 

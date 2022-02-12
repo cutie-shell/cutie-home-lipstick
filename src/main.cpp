@@ -36,6 +36,7 @@ int main(int argc, char **argv)
 
 	QmlPath::append("/usr/share/lipstick-cutie-home-qt5/qml");
 	QGuiApplication::setFont(QFont("Lato"));
+	QIcon::setThemeName("Papirus-Maia"); // TODO: Don't hardcode theme name
 
 	qmlRegisterType<CutieWindowModel>("org.cutieshell", 1, 0, "CutieWindowModel");
 
