@@ -10,18 +10,14 @@ import "applauncher"
 Drawer {
     id: root
     edge: (comp.screenOrientation == Qt.PortraitOrientation ? Qt.BottomEdge  : 
-        (comp.screenOrientation == Qt.InvertedLandscapeOrientation ? Qt.LeftEdge : 
-        (comp.screenOrientation == Qt.InvertedPortraitOrientation ? Qt.TopEdge : Qt.RightEdge)))
+        (comp.screenOrientation == Qt.InvertedLandscapeOrientation ? Qt.RightEdge : 
+        (comp.screenOrientation == Qt.InvertedPortraitOrientation ? Qt.TopEdge : Qt.LeftEdge)))
     interactive: !LipstickSettings.lockscreenVisible
     dragMargin: 2 * Screen.pixelDensity
     width: parent.width
     height: parent.height
 
     property Item wallpaperItem
-
-    function close() {
-        position = 0;
-    }
 
     background: Item {
         anchors.fill: parent
@@ -32,7 +28,7 @@ Drawer {
             source: wallpaperItem
             x: ((comp.screenOrientation == Qt.PortraitOrientation || 
             comp.screenOrientation == Qt.InvertedPortraitOrientation) 
-            ? 0 : (comp.screenOrientation == Qt.LandscapeOrientation ? root.position - 1.0: 1.0 - root.position) * Screen.width)
+            ? 0 : (comp.screenOrientation == Qt.LandscapeOrientation ? 1.0 - root.position: root.position - 1.0) * Screen.width)
             y: ((comp.screenOrientation == Qt.PortraitOrientation || 
             comp.screenOrientation == Qt.InvertedPortraitOrientation) 
             ? (comp.screenOrientation == Qt.PortraitOrientation ? root.position - 1.0: 1.0 - root.position) * Screen.height : 0)

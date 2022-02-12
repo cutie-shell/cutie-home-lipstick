@@ -87,11 +87,13 @@ Item {
             id: homeLayer
             z: comp.homeActive ? 4 : 1
             anchors.fill: parent
+            visible: !LipstickSettings.lockscreenVisible
         }
 
         Item {
             id: appLayer
             z: 2
+            visible: !LipstickSettings.lockscreenVisible
         }
 
         Item {
@@ -101,7 +103,7 @@ Item {
 
         Item {
             id: notificationLayer
-            z: 6
+            z: 8
         }
         Item {
             id: alarmsLayer
@@ -345,7 +347,7 @@ Item {
     AppLauncher {
         id: appLauncher
         wallpaperItem: root
-        z: 8
+        z: 6
     }
 
     function setLockScreen(enabled) {
@@ -359,17 +361,19 @@ Item {
     Connections {
         target: Lipstick.compositor
         function onDisplayOff() {
+            appLauncher.close();
             LipstickSettings.lockscreenVisible = true
         }
 
         function onDisplayOn() {
+            appLauncher.close();
             LipstickSettings.lockscreenVisible = true
         }
     }
 
     LockScreen {
         id: lockScreen
-        z: 10
+        z: 7
         rotation: Screen.angleBetween(comp.screenOrientation, Screen.primaryOrientation)
         width: ((comp.screenOrientation == Qt.PortraitOrientation || 
             comp.screenOrientation == Qt.InvertedPortraitOrientation) 
