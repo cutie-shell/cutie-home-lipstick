@@ -33,12 +33,16 @@ MouseArea {
     property Text iconText: iconText
     property Item iconImage: iconImage
 
-    onClicked: {
+    function handleTap() {
         if (modelData.object.type !== LauncherModel.Folder) {
             rumbleEffect.start();
             modelData.object.launchApplication();
             appLauncher.close();
         }
+    }
+
+    onClicked: {
+        handleTap();
     }
 
     HapticsEffect {
@@ -69,6 +73,10 @@ MouseArea {
             icon.width: width
             icon.height: height
             icon.color: "transparent"
+
+            onClicked: {
+                root.handleTap();
+            }
         }
     }
 
