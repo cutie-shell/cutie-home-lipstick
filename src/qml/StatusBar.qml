@@ -9,6 +9,7 @@ import org.nemomobile.configuration 1.0
 import org.cutieshell 1.0
 
 import "scripts/desktop.js" as Desktop
+import "statusbar"
 
 Item {
     id: root
@@ -40,6 +41,14 @@ Item {
         Timer {
             interval: 100; running: true; repeat: true;
             onTriggered: parent.timeChanged()
+        }
+    }
+
+    BatteryIndicator {
+        anchors {
+            right: root.right
+            rightMargin: 2 * Screen.pixelDensity
+            verticalCenter: root.verticalCenter    
         }
     }
 }
