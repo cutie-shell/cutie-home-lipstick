@@ -125,8 +125,12 @@ Item {
         property Item topmostApplicationWindow
 
         homeActive: topmostWindow == homeWindow 
-        screenOrientation: sensorOrientation
+        screenOrientation: Qt.PortraitOrientation
 	    topmostWindowOrientation: screenOrientation
+
+        onSensorOrientationChanged: {
+            screenOrientation = sensorOrientation;
+        }
 
         onScreenOrientationChanged: {
             orientationConfig.value = screenOrientation;
