@@ -56,7 +56,7 @@ Item {
         icon.height: height
         icon.width: height
         icon.name: "battery-"+chargeValue
-        icon.color: "transparent"
+        icon.color: (batteryChargeState.value == MceBatteryState.Charging) ? "green" : (themeVariantConfig.value == "dark" ? "white" : "black")
         property string chargeValue: "000"
 
         Component.onCompleted: {
